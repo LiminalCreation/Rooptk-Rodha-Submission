@@ -1,0 +1,31 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Upload APK to the Rootpk Store
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload:
+    name: Upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release assets
+        uses: robinraju/release-downloader@v1.7
+        with: 
+          repository: "{LiminalCreation}/{Rooptk-Rodha-Submission}" # change this
+          latest: true
+          fileName: "Rodha.apk" # change this
+          out-file-path: "assets"
+          #token: ${{ secrets.GITHUB_TOKEN }} # required if your repo is private
+      - name: Upload APK to the Rootpk Store
+        working-directory: ./assets/
+        env:
+          ROOTPK_APP_ID: ${{ secrets.ROOTPK_APP_ID }}
+          ROOTPK_APP_SECRET_KEY: ${{ secrets.ROOTPK_APP_SECRET_KEY }}
+        run: |
+          curl https://api.rootpk.com/apk/upload \
+            -F appId="63d10d1c31d3c5a2035b120e" \
+            -F secretKey="rootpk_58684226-d30e-4ff0-ba8e-8ab9b0ca33f7" \
+            -F file=@Rodha.apk # change this, must be same as fileName
