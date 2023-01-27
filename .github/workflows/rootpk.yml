@@ -16,7 +16,7 @@ jobs:
         with: 
           repository: "{LiminalCreation}/{Rooptk-Rodha-Submission}" # change this
           latest: true
-          fileName: "Rodha.apk" # change this
+          fileName: "Rodha-arm64-v3.1.1-release.apk" # change this
           out-file-path: "assets"
           #token: ${{ secrets.GITHUB_TOKEN }} # required if your repo is private
       - name: Upload APK to the Rootpk Store
